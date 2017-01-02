@@ -2,7 +2,7 @@
 
 # pylint: disable=bad-indentation
 
-from distutils.core import setup, Extension
+from setuptools import setup, Extension
 
 import glob
 import os
@@ -51,6 +51,6 @@ setup(
                             ] + typeshed},
     requires=['ply (>=3.4)', 'pyyaml (>=3.11)'],
     install_requires=['ply>=3.4', 'pyyaml>=3.11'],
-    classifier=["Programming Language :: Python :: 2.7"],
+    classifiers=["Programming Language :: Python :: 2.7"],
     ext_modules = [parser_ext],
 )
