@@ -235,7 +235,11 @@ static PyMethodDef methods[] = {
 
 
 static void add_token(PyObject* dict, const char* name, int value) {
+#if PY_MAJOR_VERSION >= 3
+  PyObject* pyval = PyLong_FromLong(value);
+#else
   PyObject* pyval = PyInt_FromLong(value);
+#endif
   PyDict_SetItemString(dict, name, pyval);
   Py_DECREF(pyval);
 }
@@ -283,9 +287,34 @@ static void add_tokens_dict(PyObject* module) {
   Py_DECREF(tokens);
 }
 
+#if PY_MAJOR_VERSION >= 3
+static struct PyModuleDef moduledef = {
+        PyModuleDef_HEAD_INIT,
+        "parser_ext",
+        NULL,
+        0,
+        methods,
+        NULL,
+        NULL,
+        NULL,
+        NULL
+};
+#endif
 
-PyMODINIT_FUNC initparser_ext() {
-  // TODO(dbaum): Make this Python3 compatible.
+PyMODINIT_FUNC
+#if PY_MAJOR_VERSION >= 3
+PyInit_parser_ext()
+#else
+initparser_ext()
+#endif
+{
+#if PY_MAJOR_VERSION >= 3
+  PyObject* module = PyModule_Create(&moduledef);
+#else
   PyObject* module = Py_InitModule("parser_ext", methods);
+#endif
   add_tokens_dict(module);
+#if PY_MAJOR_VERSION >= 3
+  return module;
+#endif
 }
