@@ -1,20 +1,19 @@
-/* A Bison parser, made by GNU Bison 2.4.2.  */
+/* A Bison parser, made by GNU Bison 3.0.4.  */
 
-/* Skeleton interface for Bison's Yacc-like parsers in C
-   
-      Copyright (C) 1984, 1989-1990, 2000-2006, 2009-2010 Free Software
-   Foundation, Inc.
-   
+/* Bison interface for Yacc-like parsers in C
+
+   Copyright (C) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
+
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation, either version 3 of the License, or
    (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
    GNU General Public License for more details.
-   
+
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
@@ -27,98 +26,102 @@
    special exception, which will cause the skeleton and the resulting
    Bison output files to be licensed under the GNU General Public
    License without this special exception.
-   
+
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
+#ifndef YY_PYTYPE_PARSER_TAB_H_INCLUDED
+# define YY_PYTYPE_PARSER_TAB_H_INCLUDED
+/* Debug traces.  */
+#ifndef YYDEBUG
+# define YYDEBUG 0
+#endif
+#if YYDEBUG
+extern int pytypedebug;
+#endif
 /* "%code requires" blocks.  */
-
-/* Line 1685 of yacc.c  */
-#line 18 "parser.y"
+#line 19 "parser.y" /* yacc.c:1909  */
 
 #include <Python.h>
+namespace pytype {
+  class Context;
+}
 
+#line 51 "parser.tab.h" /* yacc.c:1909  */
 
-
-/* Line 1685 of yacc.c  */
-#line 45 "pyi/parser.tab.h"
-
-/* Tokens.  */
+/* Token type.  */
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
-   /* Put the tokens into the symbol table, so that GDB and other debuggers
-      know about them.  */
-   enum yytokentype {
-     END = 0,
-     NAME = 258,
-     NUMBER = 259,
-     LEXERROR = 260,
-     CLASS = 261,
-     DEF = 262,
-     ELSE = 263,
-     ELIF = 264,
-     IF = 265,
-     OR = 266,
-     PASS = 267,
-     IMPORT = 268,
-     FROM = 269,
-     AS = 270,
-     RAISE = 271,
-     PYTHONCODE = 272,
-     NOTHING = 273,
-     RAISES = 274,
-     NAMEDTUPLE = 275,
-     TYPEVAR = 276,
-     ARROW = 277,
-     COLONEQUALS = 278,
-     ELLIPSIS = 279,
-     EQ = 280,
-     NE = 281,
-     LE = 282,
-     GE = 283,
-     INDENT = 284,
-     DEDENT = 285,
-     TRIPLEQUOTED = 286,
-     TYPECOMMENT = 287
-   };
+  enum yytokentype
+  {
+    END = 0,
+    NAME = 258,
+    NUMBER = 259,
+    LEXERROR = 260,
+    CLASS = 261,
+    DEF = 262,
+    ELSE = 263,
+    ELIF = 264,
+    IF = 265,
+    OR = 266,
+    PASS = 267,
+    IMPORT = 268,
+    FROM = 269,
+    AS = 270,
+    RAISE = 271,
+    PYTHONCODE = 272,
+    NOTHING = 273,
+    RAISES = 274,
+    NAMEDTUPLE = 275,
+    TYPEVAR = 276,
+    ARROW = 277,
+    COLONEQUALS = 278,
+    ELLIPSIS = 279,
+    EQ = 280,
+    NE = 281,
+    LE = 282,
+    GE = 283,
+    INDENT = 284,
+    DEDENT = 285,
+    TRIPLEQUOTED = 286,
+    TYPECOMMENT = 287
+  };
 #endif
 
-
-
+/* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef union YYSTYPE
-{
 
-/* Line 1685 of yacc.c  */
-#line 58 "parser.y"
+union YYSTYPE
+{
+#line 66 "parser.y" /* yacc.c:1909  */
 
   PyObject* obj;
   const char* str;
 
+#line 102 "parser.tab.h" /* yacc.c:1909  */
+};
 
-
-/* Line 1685 of yacc.c  */
-#line 102 "pyi/parser.tab.h"
-} YYSTYPE;
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
-# define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 #endif
 
-
-
+/* Location type.  */
 #if ! defined YYLTYPE && ! defined YYLTYPE_IS_DECLARED
-typedef struct YYLTYPE
+typedef struct YYLTYPE YYLTYPE;
+struct YYLTYPE
 {
   int first_line;
   int first_column;
   int last_line;
   int last_column;
-} YYLTYPE;
-# define yyltype YYLTYPE /* obsolescent; will be withdrawn */
+};
 # define YYLTYPE_IS_DECLARED 1
 # define YYLTYPE_IS_TRIVIAL 1
 #endif
 
 
 
+int pytypeparse (void* scanner, pytype::Context* ctx);
+
+#endif /* !YY_PYTYPE_PARSER_TAB_H_INCLUDED  */
