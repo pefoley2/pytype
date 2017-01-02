@@ -430,7 +430,7 @@ def WrapsDict(member_name, writable=False, implement_len=False):
     """.format(member_name=member_name)
 
   namespace = {}
-  exec src in namespace  # pylint: disable=exec-used
+  exec(src, namespace)  # pylint: disable=exec-used
   return namespace["WrapsDict"]
 
 

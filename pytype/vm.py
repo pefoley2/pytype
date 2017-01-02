@@ -587,7 +587,7 @@ class VirtualMachine(object):
     # pick the official name that corresponds to a value's actual name.
     global_members = sorted(
         f_globals.members.items(),
-        key=lambda (name, var): (sum(name == v.name for v in var.data), name))
+        key=lambda item: (sum(item[0] == v.name for v in item[1].data), item[0]))
     for name, var in global_members:
       abstract.variable_set(var, "official_name", name)
     for func in self.functions_with_late_annotations:

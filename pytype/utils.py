@@ -7,7 +7,10 @@ import itertools
 import os
 import re
 import shutil
-import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    from io import StringIO
 import tempfile
 import textwrap
 import threading
@@ -736,6 +739,6 @@ def ascii_tree(node, get_children):
   Returns:
     A string.
   """
-  io = StringIO.StringIO()
+  io = StringIO()
   _ascii_tree(io, node, "", "", set(), get_children)
   return io.getvalue()

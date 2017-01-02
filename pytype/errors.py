@@ -264,7 +264,8 @@ class ErrorLog(ErrorLogBase):
     else:
       return str(arg)
 
-  def _invalid_parameters(self, opcode, message, (sig, passed_args)):
+  def _invalid_parameters(self, opcode, message, param):
+    sig, passed_args = param
     details = "".join([
         "Expected: (", self._prettyprint_sig(str(sig)), ")\n",
         "Actually passed: (", self._prettyprint_sig(

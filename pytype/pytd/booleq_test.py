@@ -14,6 +14,7 @@
 # limitations under the License.
 
 """Tests for booleq.py."""
+from __future__ import print_function
 
 import unittest
 
@@ -156,11 +157,11 @@ class TestBoolEq(unittest.TestCase):
     for unknown, possible_types in sorted(mapping.items()):
       assert isinstance(possible_types, (set, frozenset))
       if len(possible_types) > cutoff:
-        print "%s can be   %s, ... (total: %d)" % (
+        print("%s can be   %s, ... (total: %d)" % (
             unknown, ", ".join(sorted(possible_types)[0:cutoff]),
-            len(possible_types))
+            len(possible_types)))
       else:
-        print "%s can be %s" % (unknown, ", ".join(sorted(possible_types)))
+        print("%s can be %s" % (unknown, ", ".join(sorted(possible_types))))
 
   def testGetFalseFirstApproximation(self):
     solver = self._MakeSolver(["x"])
