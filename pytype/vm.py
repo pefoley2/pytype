@@ -17,7 +17,10 @@ import collections
 import logging
 import os
 import re
-import repr as reprlib
+try:
+    import reprlib
+except ImportError:
+    import repr as reprlib
 import sys
 
 

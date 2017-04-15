@@ -2,7 +2,10 @@
 
 import os
 import re
-import StringIO
+try:
+    from io import StringIO
+except ImportError:
+    from StringIO import StringIO
 import sys
 
 
@@ -212,7 +215,7 @@ class ErrorLogBase(object):
     self.print_to_file(sys.stderr)
 
   def __str__(self):
-    io = StringIO.StringIO()
+    io = StringIO()
     self.print_to_file(io)
     return io.getvalue()
 

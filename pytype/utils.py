@@ -7,10 +7,7 @@ import itertools
 import os
 import re
 import shutil
-try:
-    from StringIO import StringIO
-except ImportError:
-    from io import StringIO
+import six
 import tempfile
 import textwrap
 import threading
@@ -446,7 +443,7 @@ def list_strip_prefix(l, prefix):
 
 def _arg_names(f):
   """Return the argument names of a function."""
-  return f.func_code.co_varnames[:f.func_code.co_argcount]
+  return six.get_function_code(f).co_varnames[:six.get_function_code(f).co_argcount]
 
 
 class memoize(object):  # pylint: disable=invalid-name
@@ -477,7 +474,10 @@ class memoize(object):  # pylint: disable=invalid-name
       return memoize(key)(f)
     else:
       key = key_or_function
-      return object.__new__(cls, key)
+      if six.PY3:
+          return object.__new__(cls)
+      else:
+        return object.__new__(cls, key)
 
   def __init__(self, key):
     self.key = key
@@ -487,11 +487,11 @@ class memoize(object):  # pylint: disable=invalid-name
     argnames = _arg_names(f)
     memoized = {}
     no_result = object()
-    if f.func_defaults:
-      defaults = dict(zip(argnames[-len(f.func_defaults):], f.func_defaults))
+    if six.get_function_defaults(f):
+      defaults = dict(zip(argnames[-len(six.get_function_defaults(f)):], six.get_function_defaults(f)))
     else:
       defaults = {}
-    pos_and_arg_tuples = zip(range(f.func_code.co_argcount), argnames)
+    pos_and_arg_tuples = zip(range(six.get_function_code(f).co_argcount), argnames)
     shared_dict = {}
     # TODO(kramm): Use functools.wraps or functools.update_wrapper to preserve
     # the metadata of the original function.
@@ -739,6 +739,6 @@ def ascii_tree(node, get_children):
   Returns:
     A string.
   """
-  io = StringIO()
+  io = six.StringIO()
   _ascii_tree(io, node, "", "", set(), get_children)
   return io.getvalue()

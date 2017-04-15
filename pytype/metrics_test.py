@@ -1,6 +1,9 @@
 """Test errors.py."""
 
-import cStringIO
+try:
+    from cStringIO import StringIO
+except ImportError:
+    from io import StringIO
 import math
 import tempfile
 
@@ -65,17 +68,17 @@ class MetricsTest(unittest.TestCase):
     # Reset metrics, merge from dump, which will create a new metric.
     metrics._prepare_for_test()
     self.assertEquals(0, len(metrics._registered_metrics))
-    metrics.merge_from_file(cStringIO.StringIO(dump))
+    metrics.merge_from_file(StringIO(dump))
     m = metrics._registered_metrics["foo"]
     self.assertEquals(1, m._total)
     # Merge again, this time it will merge data into the existing metric.
-    metrics.merge_from_file(cStringIO.StringIO(dump))
+    metrics.merge_from_file(StringIO(dump))
     self.assertEquals(2, m._total)
     # It's an error to merge an incompatible type.
     metrics._prepare_for_test()
     _ = metrics.MapCounter("foo")
     self.assertRaises(TypeError, metrics.merge_from_file,
-                      cStringIO.StringIO(dump))
+                      StringIO(dump))
 
 
 class StopWatchTest(unittest.TestCase):

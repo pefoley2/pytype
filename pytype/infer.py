@@ -3,7 +3,7 @@
 import collections
 import logging
 import os
-import StringIO
+import six
 import subprocess
 import sys
 
@@ -504,7 +504,7 @@ def program_to_text(program):
   Returns:
     A string representing all of the data for this program.
   """
-  s = StringIO.StringIO()
+  s = six.StringIO()
   seen = set()
   for node in utils.order_nodes(program.cfg_nodes):
     seen.add(node)
@@ -548,7 +548,7 @@ def program_to_dot(program, ignored, only_cfg=False):
       sum(len(v.bindings) for v in program.variables),
       len(program.variables)))
 
-  sb = StringIO.StringIO()
+  sb = six.StringIO()
   sb.write("digraph {\n")
   for node in program.cfg_nodes:
     if node in ignored:

@@ -1,7 +1,7 @@
 """Tests for displaying errors."""
 
 import os
-import StringIO
+import six
 import unittest
 
 from pytype import utils
@@ -19,7 +19,7 @@ class ErrorTest(test_inference.InferenceTest):
       f(3)
       f(4)
     """)
-    s = StringIO.StringIO()
+    s = six.StringIO()
     errors.print_to_file(s)
     self.assertEquals(1, len([line for line in s.getvalue().splitlines()
                               if "foobar" in line]))

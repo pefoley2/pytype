@@ -1,6 +1,7 @@
 """Representation of Python function headers and calls."""
 
 import collections
+import six
 
 
 
@@ -37,9 +38,9 @@ class Signature(object):
     self.annotations = annotations
     self.late_annotations = late_annotations
     self.has_return_annotation = "return" in annotations
-    self.has_param_annotations = bool(annotations.viewkeys() - {"return"})
+    self.has_param_annotations = bool(six.viewkeys(annotations) - {"return"})
     if postprocess_annotations:
-      for name, annot in self.annotations.iteritems():
+      for name, annot in six.iteritems(self.annotations):
         self.annotations[name] = self._postprocess_annotation(name, annot)
 
   def _postprocess_annotation(self, name, annotation):

@@ -19,7 +19,7 @@ def scan_package_data(path, pattern):
 
 
 typeshed = scan_package_data('typeshed', '*.pyi')
-assert 'typeshed/stdlib/2.7/*.pyi' in typeshed
+assert 'typeshed/stdlib/2/*.pyi' in typeshed
 
 parser_ext = Extension(
     'pytype.pyi.parser_ext',
@@ -49,7 +49,7 @@ setup(
                              'pytd/stdlib/*.pytd',
                              'pytd/stdlib/*/*.pytd',
                             ] + typeshed},
-    requires=['ply (>=3.4)', 'pyyaml (>=3.11)'],
+    requires=['ply (>=3.4)', 'pyyaml (>=3.11)', 'six (>=1.1.0)'],
     install_requires=['ply>=3.4', 'pyyaml>=3.11'],
     classifiers=["Programming Language :: Python :: 2.7"],
     ext_modules = [parser_ext],
